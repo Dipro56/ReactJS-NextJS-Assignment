@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../assets/logo/ecommerce_logo.png';
 import { FaCartPlus } from 'react-icons/fa';
-import test from '../../assets/productImage/bag.jpg';
+import styles from './../../styles/Hover.module.css';
 
 export const Header = () => {
   return (
@@ -22,10 +22,16 @@ export const Header = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="/myOrder" className="fs-5 link-dark">
+            <Nav.Link
+              href="/myOrder"
+              className={`fs-5  ${styles['link-color']}`}
+            >
               My Order
             </Nav.Link>
-            <Nav.Link href={`/item`} className="fs-5 link-dark">
+            <Nav.Link
+              href={`/item`}
+              className={`fs-5  ${styles['link-color']}`}
+            >
               <FaCartPlus size={27} className="me-2" />
             </Nav.Link>
           </Nav>

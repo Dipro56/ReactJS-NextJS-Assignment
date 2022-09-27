@@ -1,0 +1,7 @@
+.card-for-hover:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.629);
+}
+
+.link-color:hover{
+  color: rgb(57, 134, 241);
+}
