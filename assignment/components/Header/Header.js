@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../assets/logo/ecommerce_logo.png';
 import { FaCartPlus } from 'react-icons/fa';
+import test from '../../assets/productImage/bag.jpg';
 
 export const Header = () => {
   return (
