@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import { CartContext, CountContext } from '../../pages/_app';
 
 export const Header = () => {
-  const value = useContext(CountContext);
+  // const value = useContext(CountContext);
   const { cartItem } = useContext(CartContext);
 
   return (
@@ -34,11 +34,11 @@ export const Header = () => {
               My Order
             </Nav.Link>
             <Nav.Link
-              href={`/item`}
+              href={`/shoppingCart`}
               className={`fs-5  ${styles['link-color']}`}
             >
               <FaCartPlus size={27} />
-              {cartItem.length > 0 ? (
+              {cartItem?.length > 0 ? (
                 <span
                   className={
                     (styles.badge, styles['badge-warning'], styles.lblCartCount)

@@ -1,15 +1,13 @@
 import React, { createContext, useContext, useState } from 'react';
 import Image from 'next/image';
 import { FaCartPlus } from 'react-icons/fa';
-import { CartContext, CountContext } from '../../pages/_app';
+import { CartContext } from '../../pages/_app';
 
 export const SingleProductDetailCard = (props) => {
   const { title, price, imageSource, description, category, quantity } =
     props.productInfo;
 
-  const value = useContext(CountContext);
-  const { cartHandle } = useContext(CartContext);
-  console.log(value);
+  const { cartHandle, cartItem } = useContext(CartContext);
 
   // const cartItem = new Array();
   // const [cart, setCart] = useState();
@@ -56,6 +54,7 @@ export const SingleProductDetailCard = (props) => {
         </div>
         <button
           onClick={() => {
+            console.log(props.productInfo);
             cartHandle(props.productInfo);
           }}
           className="btn btn-primary d-flex justify-content-center align-items-center"
