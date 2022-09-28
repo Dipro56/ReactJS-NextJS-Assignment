@@ -6,8 +6,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../assets/logo/ecommerce_logo.png';
 import { FaCartPlus } from 'react-icons/fa';
 import styles from './../../styles/Hover.module.css';
+import { useContext } from 'react';
+import { CartContext, CountContext } from '../../pages/_app';
 
 export const Header = () => {
+  const value = useContext(CountContext);
+  const { cartItem } = useContext(CartContext);
+
   return (
     <Navbar
       collapseOnSelect
@@ -32,7 +37,19 @@ export const Header = () => {
               href={`/item`}
               className={`fs-5  ${styles['link-color']}`}
             >
-              <FaCartPlus size={27} className="me-2" />
+              <FaCartPlus size={27} />
+              {cartItem.length > 0 ? (
+                <span
+                  className={
+                    (styles.badge, styles['badge-warning'], styles.lblCartCount)
+                  }
+                >
+                  {' '}
+                  {cartItem.length}{' '}
+                </span>
+              ) : (
+                <span> </span>
+              )}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

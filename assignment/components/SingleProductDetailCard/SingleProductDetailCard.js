@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import Image from 'next/image';
 import { FaCartPlus } from 'react-icons/fa';
+import { CartContext, CountContext } from '../../pages/_app';
 
 export const SingleProductDetailCard = (props) => {
   const { title, price, imageSource, description, category, quantity } =
     props.productInfo;
 
+  const value = useContext(CountContext);
+  const { cartHandle } = useContext(CartContext);
+  console.log(value);
+
+  // const cartItem = new Array();
+  // const [cart, setCart] = useState();
+  // const [count, setCount] = useState(0);
+
+  // const handleAddToCart = () => {
+  //   setCart(props.productInfo);
+  //   cartItem.push(cart);
+  //   // console.log(cartItem);
+  //   setCount(count + 1);
+  //   console.log(count);
+  // };
   return (
     <div className="col-lg-4 col-md-8 col-sm-12 mt-3 mb-3">
       <div className={`card w-100 h-100 card-for-hover `}>
@@ -38,7 +54,12 @@ export const SingleProductDetailCard = (props) => {
             Quantity: {quantity}
           </p>
         </div>
-        <button className="btn btn-primary d-flex justify-content-center align-items-center">
+        <button
+          onClick={() => {
+            cartHandle(props.productInfo);
+          }}
+          className="btn btn-primary d-flex justify-content-center align-items-center"
+        >
           Add to cart <FaCartPlus size={20} className="ms-2" />
         </button>
       </div>

@@ -4,7 +4,6 @@ import path from 'path';
 import { SingleProductDetailCard } from '../../components/SingleProductDetailCard/SingleProductDetailCard';
 
 const ProductDetail = (props) => {
-  console.log(props);
   return (
     <div className="m-5 d-flex justify-content-center">
       <SingleProductDetailCard
