@@ -1,36 +1,64 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 
 const checkoutPage = () => {
   const [orderSummery, setOrderSummery] = useState();
   const [price, setPrice] = useState();
-  let previousOrders = [];
+  // const [orderUpdate, setOrderUpdate] = useState([]);
+
+  const router = useRouter();
 
   // const [orderUpdate, setOrderUpdate] = useState([]);
 
   const emailRef = useRef('');
   const phoneRef = useRef('');
   const addressRef = useRef('');
+
   const handleOrderSubmit = (event) => {
     event.preventDefault();
+    let id;
     const email = emailRef.current.value;
     const phone = phoneRef.current.value;
     const address = addressRef.current.value;
-    const orderDetail = { email, phone, address, orderSummery, price };
-    previousOrders.push(orderDetail);
-    // if (orderUpdate) setOrderUpdate([...orderUpdate, orderDetail]);
+    // setOrderUpdate([orderDetail]);
+    //current order
+    let order = [];
+    const temp = JSON.parse(localStorage.getItem('allOrders'));
+    console.log('temp', temp);
+    if (temp) {
+      id = temp.length + 1;
+      // order = [...temp, orderDetail];
+    } else {
+      id = 1;
+      // order = [orderDetail];
+    }
+    const orderDetail = { email, phone, address, orderSummery, price, id };
+    if (id > 1) order = [...temp, orderDetail];
+    else order = [orderDetail];
+
+    localStorage.setItem('allOrders', JSON.stringify(order));
+    router.push({
+      pathname: '/myOrder',
+    });
     // else setOrderUpdate(orderUpdate);
-    localStorage.setItem('previousOrders', JSON.stringify(previousOrders));
   };
 
   useEffect(() => {
     setOrderSummery(JSON.parse(localStorage.getItem('checkOutItem')));
     setPrice(JSON.parse(localStorage.getItem('totalPrice')));
-    //  if (previousItems) {
-    //    setCartItem(previousItems);
-    //  }
-    // setCartItem(cartItem);
-    //localStorage.setItem('items', JSON.stringify(items));
+    //current
+    // const oldOrders = JSON.parse(localStorage.getItem('currentOrder'));
+    // if (oldOrders) setOrderUpdate(JSON.parse(localStorage.getItem('currentOrder')));
+    // console.log('orderUpdate', orderUpdate);
+    // setOrderUpdate(JSON.parse(localStorage.getItem('currentOrder')));
+    // console.log('orderUpdate', orderUpdate);
   }, []);
+
+  // useEffect(() => {
+  //   //all order
+  // console.log('all order', JSON.parse(localStorage.getItem('allOrders')));
+  //   localStorage.setItem('allOrders', JSON.stringify(orderUpdate));
+  // }, [orderUpdate]);
   return (
     <div className="d-flex justify-content-center mt-5">
       <div className="card col-lg-6 col-md-10 col-sm-12 p-5">

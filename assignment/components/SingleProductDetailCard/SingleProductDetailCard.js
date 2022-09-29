@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaCartPlus } from 'react-icons/fa';
 import { CartContext } from '../../pages/_app';
@@ -8,6 +8,11 @@ export const SingleProductDetailCard = (props) => {
     props.productInfo;
 
   const { cartHandle, cartItem } = useContext(CartContext);
+
+  const [addToCartItem, setAddToCartItem] = useState([]);
+  useEffect(() => {
+    localStorage.setItem('cartItem', JSON.stringify(cartItem));
+  }, [addToCartItem]);
 
   // const cartItem = new Array();
   // const [cart, setCart] = useState();
@@ -54,6 +59,7 @@ export const SingleProductDetailCard = (props) => {
         </div>
         <button
           onClick={() => {
+            setAddToCartItem(props.productInfo);
             console.log(props.productInfo);
             cartHandle(props.productInfo);
           }}

@@ -8,6 +8,7 @@ export const CartContext = createContext([]);
 function MyApp({ Component, pageProps }) {
   // const [count, setCount] = useState(0);
   const [cartItem, setCartItem] = useState([]);
+  const [allOrder, setAllOrder] = useState([]);
 
   // const countHandle = () => {
   //   setCount(count + 1);
@@ -16,7 +17,6 @@ function MyApp({ Component, pageProps }) {
   const cartHandle = (item) => {
     setCartItem([...cartItem, item]);
 
-    localStorage.setItem('cartItem', JSON.stringify(cartItem));
     console.log(cartItem);
   };
 
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
     //localStorage.setItem('items', JSON.stringify(items));
   }, []);
   return (
-    <CartContext.Provider value={{ cartItem, cartHandle }}>
+    <CartContext.Provider value={{ cartItem, cartHandle, allOrder }}>
       <div>
         <Header />
         <Component {...pageProps} />
