@@ -8,7 +8,6 @@ export const CartContext = createContext([]);
 function MyApp({ Component, pageProps }) {
   // const [count, setCount] = useState(0);
   const [cartItem, setCartItem] = useState([]);
-  const [allOrder, setAllOrder] = useState([]);
 
   // const countHandle = () => {
   //   setCount(count + 1);
@@ -18,6 +17,10 @@ function MyApp({ Component, pageProps }) {
     setCartItem([...cartItem, item]);
 
     console.log(cartItem);
+  };
+
+  const cartInitial = (item) => {
+    setCartItem(item);
   };
 
   useEffect(() => {
@@ -31,7 +34,7 @@ function MyApp({ Component, pageProps }) {
     //localStorage.setItem('items', JSON.stringify(items));
   }, []);
   return (
-    <CartContext.Provider value={{ cartItem, cartHandle, allOrder }}>
+    <CartContext.Provider value={{ cartItem, cartHandle, cartInitial }}>
       <div>
         <Header />
         <Component {...pageProps} />

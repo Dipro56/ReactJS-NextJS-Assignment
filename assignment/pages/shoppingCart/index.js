@@ -50,31 +50,26 @@ const ShoppingCart = () => {
 
   return (
     <div className="m-5 d-flex justify-content-center overflow-auto">
-      <div className="container overflow-auto">
-        <div className="d-flex justify-content-center aling-items-center overflow-auto ">
-          <div className="col-4 bg-light p-3 overflow-auto">
-            <h5>Image</h5>
-          </div>
-          <div className="justify-content-center align-items-center col-2  bg-light p-3 overflow-auto">
-            <h5>Title</h5>
-          </div>
-          <div className="d-flex justify-content-center col-3  bg-light p-3 overflow-auto">
-            <h5 className="text-start">Amount</h5>
-          </div>
-          <div className="d-flex justify-content-center col-3 bg-light p-3 overflow-auto">
-            <h5>Total </h5>
-          </div>
+      <div className="container ">
+        <table className="table ">
+          <thead className="thead-dark">
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Net Price</th>
+            </tr>
+          </thead>
+          {countItem?.map((countItem) => (
+            <CartTile key={countItem.index} countItem={countItem}></CartTile>
+          ))}
+        </table>
+
+        <div className="d-flex justify-content-center">
+          <h6 className="text-center">Total: {totalPrice} BDT</h6>
         </div>
         <hr />
-        {countItem?.map((countItem) => (
-          <CartTile key={countItem.index} countItem={countItem}></CartTile>
-        ))}
-        <hr />
-        <div className="d-flex justify-content-end aling-items-center overflow-auto">
-          <div className="col-2 bg-light  d-flex justify-content-start ">
-            <h5>Total Price &nbsp; &nbsp; {totalPrice} </h5>
-          </div>
-        </div>
         <div className="d-flex justify-content-center">
           <button onClick={handleCheckOut} className="btn btn-primary">
             Checkout

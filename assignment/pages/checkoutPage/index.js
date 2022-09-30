@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { CartContext } from '../_app';
 
 const checkoutPage = () => {
   const [orderSummery, setOrderSummery] = useState();
@@ -7,6 +8,8 @@ const checkoutPage = () => {
   // const [orderUpdate, setOrderUpdate] = useState([]);
 
   const router = useRouter();
+
+  const { cartInitial } = useContext(CartContext);
 
   // const [orderUpdate, setOrderUpdate] = useState([]);
 
@@ -16,7 +19,7 @@ const checkoutPage = () => {
 
   const handleOrderSubmit = (event) => {
     event.preventDefault();
-    let id;
+    let orderID;
     const email = emailRef.current.value;
     const phone = phoneRef.current.value;
     const address = addressRef.current.value;
@@ -26,17 +29,45 @@ const checkoutPage = () => {
     const temp = JSON.parse(localStorage.getItem('allOrders'));
     console.log('temp', temp);
     if (temp) {
-      id = temp.length + 1;
+      orderID = temp.length + 1;
       // order = [...temp, orderDetail];
     } else {
-      id = 1;
+      orderID = 1;
       // order = [orderDetail];
     }
-    const orderDetail = { email, phone, address, orderSummery, price, id };
-    if (id > 1) order = [...temp, orderDetail];
+
+    //setting time
+    var today = new Date();
+    var date =
+      today.getDate() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getFullYear();
+    var time = today.getHours() + ':' + today.getMinutes() + ':';
+    if (today.getHours() >= 12)
+      time = today.getHours() + ':' + today.getMinutes() + ' PM';
+    else time = today.getHours() + ':' + today.getMinutes() + ' AM';
+    const orderDetail = {
+      orderID,
+      email,
+      phone,
+      address,
+      orderSummery,
+      price,
+      date,
+      time,
+    };
+    if (orderID > 1) order = [...temp, orderDetail];
     else order = [orderDetail];
 
     localStorage.setItem('allOrders', JSON.stringify(order));
+    localStorage.removeItem('checkOutItem');
+    localStorage.removeItem('totalPrice');
+    const newItem = [];
+    cartInitial(newItem);
+    localStorage.setItem('cartItem', JSON.stringify(newItem));
+
     router.push({
       pathname: '/myOrder',
     });
@@ -59,6 +90,8 @@ const checkoutPage = () => {
   // console.log('all order', JSON.parse(localStorage.getItem('allOrders')));
   //   localStorage.setItem('allOrders', JSON.stringify(orderUpdate));
   // }, [orderUpdate]);
+
+  console.log('checkout order summery ', orderSummery);
   return (
     <div className="d-flex justify-content-center mt-5">
       <div className="card col-lg-6 col-md-10 col-sm-12 p-5">
@@ -117,14 +150,18 @@ const checkoutPage = () => {
           {orderSummery?.map((product) => (
             <div className="d-flex justify-content-between">
               <div className="me-5">{product.item.title}</div>
-              <div className="ms-5 me-5">{`${product.totalCount} * ${product.item.price}`}</div>
+              <div className="ms-5 me-5">
+                {' '}
+                {`${product.totalCount}`} *{' '}
+                {product.item.price / product.totalCount}
+              </div>
             </div>
           ))}
           <hr />
           <div>
             <div className="d-flex justify-content-between">
               <div className="me-5">Net Total</div>
-              <div className="ms-5 me-5">{price}</div>
+              <div className="ms-5 me-5">{price} BDT</div>
             </div>
           </div>
 
