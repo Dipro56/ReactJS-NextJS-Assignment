@@ -11,8 +11,6 @@ const checkoutPage = () => {
 
   const { cartInitial } = useContext(CartContext);
 
-  // const [orderUpdate, setOrderUpdate] = useState([]);
-
   const emailRef = useRef('');
   const phoneRef = useRef('');
   const addressRef = useRef('');
@@ -23,17 +21,15 @@ const checkoutPage = () => {
     const email = emailRef.current.value;
     const phone = phoneRef.current.value;
     const address = addressRef.current.value;
-    // setOrderUpdate([orderDetail]);
+
     //current order
     let order = [];
     const temp = JSON.parse(localStorage.getItem('allOrders'));
     console.log('temp', temp);
     if (temp) {
       orderID = temp.length + 1;
-      // order = [...temp, orderDetail];
     } else {
       orderID = 1;
-      // order = [orderDetail];
     }
 
     //setting time
@@ -71,27 +67,13 @@ const checkoutPage = () => {
     router.push({
       pathname: '/myOrder',
     });
-    // else setOrderUpdate(orderUpdate);
   };
 
   useEffect(() => {
     setOrderSummery(JSON.parse(localStorage.getItem('checkOutItem')));
     setPrice(JSON.parse(localStorage.getItem('totalPrice')));
-    //current
-    // const oldOrders = JSON.parse(localStorage.getItem('currentOrder'));
-    // if (oldOrders) setOrderUpdate(JSON.parse(localStorage.getItem('currentOrder')));
-    // console.log('orderUpdate', orderUpdate);
-    // setOrderUpdate(JSON.parse(localStorage.getItem('currentOrder')));
-    // console.log('orderUpdate', orderUpdate);
   }, []);
 
-  // useEffect(() => {
-  //   //all order
-  // console.log('all order', JSON.parse(localStorage.getItem('allOrders')));
-  //   localStorage.setItem('allOrders', JSON.stringify(orderUpdate));
-  // }, [orderUpdate]);
-
-  console.log('checkout order summery ', orderSummery);
   return (
     <div className="d-flex justify-content-center mt-5">
       <div className="card col-lg-6 col-md-10 col-sm-12 p-5">

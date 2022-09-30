@@ -4,11 +4,7 @@ export const OrderDetailsCard = (props) => {
   console.log('single order details', props?.orderDetail?.orderSummery);
   const summeryList = props?.orderDetail?.orderSummery;
   console.log('summeryList', summeryList);
-  // {
-  //   countItem?.map((countItem) => (
-  //     <CartTile key={countItem.index} countItem={countItem}></CartTile>
-  //   ));
-  // }
+
   return (
     <div className="card">
       <div className="card-body">

@@ -1,7 +1,5 @@
-import Link from 'next/link';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import CartTile from '../../components/CartTile/CartTile';
-import { CartContext } from '../_app';
 import { useRouter } from 'next/router';
 
 const ShoppingCart = () => {

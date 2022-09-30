@@ -6,6 +6,9 @@ import { CartContext } from '../../pages/_app';
 export const SingleProductDetailCard = (props) => {
   const { title, price, imageSource, description, category, quantity } =
     props.productInfo;
+  const [updateQuantity, setUpdateQuantity] = useState(quantity);
+  const { productList } = props;
+  console.log('productList', productList);
 
   const { cartHandle, cartItem } = useContext(CartContext);
 
@@ -14,17 +17,10 @@ export const SingleProductDetailCard = (props) => {
     localStorage.setItem('cartItem', JSON.stringify(cartItem));
   }, [addToCartItem]);
 
-  // const cartItem = new Array();
-  // const [cart, setCart] = useState();
-  // const [count, setCount] = useState(0);
+  const quantityHandler = (quantity) => {
+    setUpdateQuantity(quantity - 1);
+  };
 
-  // const handleAddToCart = () => {
-  //   setCart(props.productInfo);
-  //   cartItem.push(cart);
-  //   // console.log(cartItem);
-  //   setCount(count + 1);
-  //   console.log(count);
-  // };
   return (
     <div className="col-lg-4 col-md-8 col-sm-12 mt-3 mb-3">
       <div className={`card w-100 h-100 card-for-hover `}>
@@ -54,11 +50,12 @@ export const SingleProductDetailCard = (props) => {
             Price: {price} BDT
           </h6>
           <p className="justify-content-start d-flex text-start">
-            Quantity: {quantity}
+            Quantity: {updateQuantity}
           </p>
         </div>
         <button
           onClick={() => {
+            quantityHandler(updateQuantity);
             setAddToCartItem(props.productInfo);
             console.log(props.productInfo);
             cartHandle(props.productInfo);

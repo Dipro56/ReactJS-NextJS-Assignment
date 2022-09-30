@@ -6,16 +6,9 @@ const orderDetail = () => {
   const router = useRouter();
   const [allOrderDetail, setAllOrderDetail] = useState([]);
 
-  console.log(router.query.id);
-  // const [orderID, setOrderID] = useState(id);
   useEffect(() => {
     const allOrders = JSON.parse(localStorage.getItem('allOrders'));
     setAllOrderDetail(allOrders);
-    // const order = allOrderDetail.find((item) => {
-    //   return router.query.id == item.orderID;
-    // });
-    // console.log(order);
-    // setOrderDetail(order);
   }, []);
 
   const orderDetail = allOrderDetail.find((item) => {
@@ -31,11 +24,6 @@ const orderDetail = () => {
         <OrderDetailsCard orderDetail={orderDetail} />
       </div>
     </div>
-    // {
-    //   countItem?.map((countItem) => (
-    //     <CartTile key={countItem.index} countItem={countItem}></CartTile>
-    //   ));
-    // }
   );
 };
 
