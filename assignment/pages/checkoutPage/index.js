@@ -65,7 +65,7 @@ const checkoutPage = () => {
     localStorage.setItem('cartItem', JSON.stringify(newItem));
 
     router.push({
-      pathname: '/myOrder',
+      pathname: `/orderDetail/${orderID}`,
     });
   };
 

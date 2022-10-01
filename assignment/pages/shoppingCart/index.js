@@ -56,6 +56,7 @@ const ShoppingCart = () => {
               <th scope="col">Title</th>
               <th scope="col">Category</th>
               <th scope="col">Amount</th>
+              <th scope="col">Price</th>
               <th scope="col">Net Price</th>
             </tr>
           </thead>
@@ -65,7 +66,7 @@ const ShoppingCart = () => {
         </table>
 
         <div className="d-flex justify-content-center">
-          <h6 className="text-center">Total: {totalPrice} BDT</h6>
+          <h6 className="text-center">Final Total: {totalPrice} BDT</h6>
         </div>
         <hr />
         <div className="d-flex justify-content-center">

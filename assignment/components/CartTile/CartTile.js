@@ -25,6 +25,9 @@ const CartTile = (props) => {
           <h6>{props.countItem?.totalCount}</h6>
         </td>
         <td>
+          <h6>{props.countItem?.item?.price / props.countItem?.totalCount}</h6>
+        </td>
+        <td>
           <h6>{props.countItem?.item?.price} BDT</h6>
         </td>
       </tr>
